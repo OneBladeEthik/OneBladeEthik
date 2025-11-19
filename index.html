@@ -3,115 +3,163 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="icon" href="favicon.png">
+  <link rel="icon" href="favicon.png" />
   <title>OneBlade</title>
 
   <style>
-    /* Full page with a professional grid background */
-    .oneblade-page {
-      display: grid;
-      grid-template-rows: auto 1fr auto;
-      min-height: 100vh;
-      background: repeating-linear-gradient(
-        45deg,
-        #1e1e2f,
-        #1e1e2f 20px,
-        #27273f 20px,
-        #27273f 40px
-      );
-      color: #ffffff;
+    /* Global page layout */
+    body {
+      margin: 0;
+      background: linear-gradient(135deg, #0d0d15, #1a1a2b 40%, #0f0f19 100%);
       font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      position: relative;
+      overflow-x: hidden;
     }
 
-    /* Navbar */
+    /* Subtle noise overlay */
+    body::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background: url("https://www.transparenttextures.com/patterns/asfalt-dark.png");
+      opacity: 0.15;
+      pointer-events: none;
+    }
+
+    /* Frosted blur header */
     .navbar {
       display: flex;
       align-items: center;
       padding: 1rem 2rem;
-      background: rgba(0, 0, 0, 0.5);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      background: rgba(255, 255, 255, 0.05);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      position: sticky;
+      top: 0;
+      z-index: 10;
     }
 
-    .navbar .logo {
-      font-weight: bold;
-      font-size: 1.5rem;
-      letter-spacing: 1px;
+    /* Centered logo in header */
+    .navbar img {
+      height: 45px;
+      width: auto;
+      object-fit: contain;
     }
 
-    /* Main content */
+    /* Main content container */
     .content {
+      flex: 1;
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      text-align: center;
       gap: 2rem;
-      padding: 2rem;
+      padding: 3rem 1rem;
+      text-align: center;
+    }
+
+    /* Logo block above video */
+    .hero-logo {
+      max-width: 320px;
+      width: 90%;
+      margin-bottom: 1rem;
+      animation: fadeIn 0.8s ease;
     }
 
     /* Video styling */
     .hero-video {
-      max-width: 80%;
-      border-radius: 12px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.7);
-      transition: transform 0.3s ease;
+      max-width: 75%;
+      border-radius: 16px;
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.65);
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
     }
 
     .hero-video:hover {
-      transform: scale(1.05);
+      transform: scale(1.025);
+      box-shadow: 0 16px 45px rgba(0, 0, 0, 0.7);
     }
 
     /* Download button */
     .download-btn {
       display: inline-block;
-      padding: 0.8rem 2rem;
-      font-size: 1rem;
+      padding: 0.9rem 2.2rem;
+      font-size: 1.05rem;
       font-weight: bold;
       color: #fff;
-      background: linear-gradient(90deg, #42b883, #1e90ff);
-      border-radius: 8px;
       text-decoration: none;
-      transition: all 0.3s ease;
+      border-radius: 10px;
+      background: linear-gradient(90deg, #00b894, #0984e3);
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
+      transition: all 0.25s ease;
     }
 
     .download-btn:hover {
-      background: linear-gradient(90deg, #1e90ff, #42b883);
-      transform: translateY(-2px);
-      box-shadow: 0 8px 20px rgba(0,0,0,0.5);
+      transform: translateY(-3px);
+      box-shadow: 0 12px 35px rgba(0, 0, 0, 0.65);
+      background: linear-gradient(90deg, #0984e3, #00b894);
+    }
+
+    .footer-text {
+      opacity: 0.85;
+      max-width: 700px;
+      line-height: 1.5;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 768px) {
+      .hero-video {
+        max-width: 95%;
+      }
+      .download-btn {
+        padding: 0.9rem 1.7rem;
+      }
     }
   </style>
 </head>
 
 <body>
-  <div class="oneblade-page">
-    <!-- Navbar -->
-    <header class="navbar">
-      <div class="logo">OneBlade</div>
-    </header>
+  <!-- Frosted glass navbar -->
+  <header class="navbar">
+    <img src="oneblade.png" alt="OneBlade Logo" />
+  </header>
 
-    <!-- Main content -->
-    <main class="content">
-      <video
-        id="heroVideo"
-        class="hero-video"
-        src="demo.mp4"
-        controls
-        autoplay
-        muted
-        loop
-      ></video>
+  <!-- Main content area -->
+  <main class="content">
+    <img src="oneblade.png" alt="OneBlade Logo" class="hero-logo" />
 
-      <a id="downloadBtn" href="demo.mp4" download class="download-btn">
-        Download Video
-      </a>
+    <video
+      id="heroVideo"
+      class="hero-video"
+      src="demo.mp4"
+      controls
+      autoplay
+      muted
+      loop
+    ></video>
 
-      <a>All content on this website is not real, and is meant for a fun project in school. This website will be taken down after date of grading by our teacher.</a>
-      <a>Gruppe: Adwaith - Im video, Tanish - Videofilmer und Editor 1, Tyler - Logo Designer, programmierer, Editor 2</a>
-    </main>
-  </div>
+    <a id="downloadBtn" href="demo.mp4" download class="download-btn">
+      Download Video
+    </a>
 
-  <script>
-    // If needed, you can modify JS here later
-    // Currently just static so nothing is required
-  </script>
+    <div class="footer-text">
+      All content on this website is not real and is created solely as a school project.  
+      This site will be removed following grading.
+
+      <br><br>
+      Gruppe:  
+      Adwaith – Im Video  
+      Tanish – Videofilmer und Editor 1  
+      Tyler – Logo Designer, Programmierer, Editor 2
+    </div>
+  </main>
 </body>
 </html>
